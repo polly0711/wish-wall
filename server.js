@@ -180,8 +180,10 @@ app.delete('/api/wishes/:id', requireAdmin, async (req, res) => {
 
 // Generate QR Code (returns data URL)
 app.get('/api/qrcode', async (req, res) => {
-  const ip = getLocalIP();
-  const url = `http://${ip}:${PORT}/submit.html`;
+  const host = req.get('host');
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+  const baseUrl = process.env.RENDER_EXTERNAL_URL || `${protocol}://${host}`;
+  const url = `${baseUrl}/submit.html`;
   try {
     const dataUrl = await QRCode.toDataURL(url, {
       width: 280,
@@ -204,10 +206,15 @@ io.on('connection', (socket) => {
 
 // ── Start server ─────────────────────────────────────────────────
 server.listen(PORT, '0.0.0.0', () => {
-  const ip = getLocalIP();
+  const baseUrl = process.env.RENDER_EXTERNAL_URL || `http://${getLocalIP()}:${PORT}`;
+  const displayUrl = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+
   console.log(`\n✨ 心願牆伺服器已啟動`);
-  console.log(`   展示牆: http://localhost:${PORT}`);
-  console.log(`   手機端: http://${ip}:${PORT}/submit.html`);
-  console.log(`   管理後台: http://localhost:${PORT}/admin.html`);
-  console.log(`   (請確認手機與電腦在同一 Wi-Fi 網路下)\n`);
+  console.log(`   展示牆: ${displayUrl}`);
+  console.log(`   手機端: ${baseUrl}/submit.html`);
+  console.log(`   管理後台: ${displayUrl}/admin.html`);
+  if (!process.env.RENDER_EXTERNAL_URL) {
+    console.log(`   (請確認手機與電腦在同一 Wi-Fi 網路下)`);
+  }
+  console.log('\n');
 });

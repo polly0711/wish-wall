@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理後台 — 心願牆</title>
+  <meta name="description" content="心願牆管理後台，可編輯或刪除心願。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <div class="bg-overlay"></div>
+
+  <div class="app">
+
+    <!-- Login Screen -->
+    <div class="login-card" id="login-card">
+      <div class="login-icon">🔐</div>
+      <h1 class="login-title">管理後台</h1>
+      <p class="login-subtitle">請輸入管理員密碼</p>
+      <form id="login-form">
+        <div class="input-wrap">
+          <input
+            id="password-input"
+            type="password"
+            class="field-input"
+            placeholder="請輸入密碼"
+            autocomplete="off"
+            required
+          />
+        </div>
+        <p class="field-error" id="login-error"></p>
+        <button type="submit" class="login-btn">登入</button>
+      </form>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="dashboard hidden" id="dashboard">
+      <header class="dash-header">
+        <div class="dash-header-left">
+          <h1 class="dash-title">🏮 心願牆管理後台</h1>
+          <p class="dash-subtitle">共 <span id="wish-count">0</span> 則心願</p>
+        </div>
+        <div class="dash-header-right">
+          <a href="/" class="link-btn" target="_blank">🖥️ 展示牆</a>
+          <button class="logout-btn" id="logout-btn">登出</button>
+        </div>
+      </header>
+
+      <div class="table-wrap">
+        <table class="wish-table" id="wish-table">
+          <thead>
+            <tr>
+              <th class="th-num">#</th>
+              <th class="th-name">姓名</th>
+              <th class="th-content">心願內容</th>
+              <th class="th-time">時間</th>
+              <th class="th-actions">操作</th>
+            </tr>
+          </thead>
+          <tbody id="wish-tbody"></tbody>
+        </table>
+        <div class="empty-state hidden" id="empty-state">
+          <p>🏮 目前沒有任何心願</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal-overlay hidden" id="modal-overlay">
+    <div class="modal-card" id="modal-card">
+      <h2 class="modal-title">✏️ 編輯心願</h2>
+      <form id="edit-form">
+        <input type="hidden" id="edit-id" />
+        <div class="field-group">
+          <label class="field-label" for="edit-name">姓名 / 暱稱</label>
+          <input id="edit-name" type="text" class="field-input" maxlength="30" required />
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="edit-content">
+            心願內容
+            <span class="char-count" id="edit-char-count">0 / 200</span>
+          </label>
+          <textarea id="edit-content" class="field-textarea" maxlength="200" rows="4" required></textarea>
+        </div>
+        <p class="field-error" id="edit-error"></p>
+        <div class="modal-actions">
+          <button type="button" class="cancel-btn" id="cancel-btn">取消</button>
+          <button type="submit" class="save-btn">💾 儲存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirm Modal -->
+  <div class="modal-overlay hidden" id="delete-overlay">
+    <div class="modal-card modal-sm">
+      <h2 class="modal-title">🗑️ 確認刪除</h2>
+      <p class="delete-msg">確定要刪除這則心願嗎？<br>此操作無法復原。</p>
+      <input type="hidden" id="delete-id" />
+      <div class="modal-actions">
+        <button type="button" class="cancel-btn" id="delete-cancel-btn">取消</button>
+        <button type="button" class="delete-confirm-btn" id="delete-confirm-btn">🗑️ 確認刪除</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

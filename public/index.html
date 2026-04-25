@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>心願牆 ✨ Wish Wall</title>
+  <meta name="description" content="掃描 QR Code，留下您的心願，讓我們一同見證每一個美好的期盼。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="display.css" />
+</head>
+<body>
+  <!-- Background effects -->
+  <div class="bg-layer"></div>
+  <canvas id="stars-canvas"></canvas>
+  <div class="ember-container" id="embers"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="lantern lantern-left">
+        <div class="lantern-body"><span>心</span></div>
+        <div class="lantern-string"></div>
+      </div>
+      <div class="title-block">
+        <h1 class="main-title">心 願 牆</h1>
+        <p class="sub-title">Wish Wall — 留下您的期盼，讓心願隨燈光升起</p>
+      </div>
+      <div class="lantern lantern-right">
+        <div class="lantern-body"><span>願</span></div>
+        <div class="lantern-string"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <div class="wishes-grid" id="wishes-grid">
+      <!-- Wish cards injected here -->
+    </div>
+    <div class="empty-state" id="empty-state">
+      <div class="empty-icon">🏮</div>
+      <p>尚無心願，掃描右方 QR Code 留下第一個心願吧！</p>
+    </div>
+  </main>
+
+  <!-- QR Code panel -->
+  <aside class="qr-panel" id="qr-panel">
+    <div class="qr-glow"></div>
+    <p class="qr-label">掃描送出心願</p>
+    <img id="qr-img" src="" alt="QR Code" />
+    <p class="qr-url" id="qr-url"></p>
+  </aside>
+
+  <!-- Floating lantern animation container -->
+  <div class="floating-lanterns" id="floating-lanterns"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="display.js"></script>
+</body>
+</html>

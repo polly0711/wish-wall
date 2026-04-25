@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>許下心願 🏮 Wish Wall</title>
+  <meta name="description" content="在這裡寫下您的心願，讓它在心願牆上閃耀。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="mobile.css" />
+</head>
+<body>
+
+  <!-- Particle background -->
+  <div class="bg-overlay"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- App shell -->
+  <div class="app">
+
+    <!-- Header -->
+    <header class="m-header">
+      <div class="lantern-icon">🏮</div>
+      <h1 class="m-title">許下心願</h1>
+      <p class="m-subtitle">讓您的期盼隨燈光升起</p>
+    </header>
+
+    <!-- Form card -->
+    <div class="form-card" id="form-card">
+      <form id="wish-form" novalidate>
+
+        <!-- Name field -->
+        <div class="field-group">
+          <label for="name-input" class="field-label">您的姓名 / 暱稱</label>
+          <div class="input-wrap">
+            <span class="input-icon">🌸</span>
+            <input
+              id="name-input"
+              type="text"
+              class="field-input"
+              placeholder="請輸入姓名或暱稱"
+              maxlength="30"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <p class="field-error" id="name-error"></p>
+        </div>
+
+        <!-- Wish field -->
+        <div class="field-group">
+          <label for="wish-input" class="field-label">
+            您的心願
+            <span class="char-count" id="char-count">0 / 200</span>
+          </label>
+          <div class="textarea-wrap">
+            <textarea
+              id="wish-input"
+              class="field-textarea"
+              placeholder="寫下您最真誠的心願吧…&#10;願望可以很大，也可以很小。"
+              maxlength="200"
+              rows="5"
+              required
+            ></textarea>
+          </div>
+          <p class="field-error" id="wish-error"></p>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="submit-btn" id="submit-btn">
+          <span class="btn-text">🏮 送出心願</span>
+          <span class="btn-spinner" id="btn-spinner"></span>
+        </button>
+
+      </form>
+    </div>
+
+    <!-- Success screen -->
+    <div class="success-card hidden" id="success-card">
+      <div class="success-lanterns" id="success-lanterns"></div>
+      <div class="success-icon">🏮</div>
+      <h2 class="success-title">心願已送出！</h2>
+      <p class="success-msg">您的心願已在心願牆上閃耀，<br>願它早日實現 ✨</p>
+      <button class="again-btn" id="again-btn">再許一個心願</button>
+    </div>
+
+  </div>
+
+  <script src="submit.js"></script>
+</body>
+</html>
